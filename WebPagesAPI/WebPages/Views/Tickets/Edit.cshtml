@@ -17,7 +17,12 @@
 
             <div class="form-group">
                 <label asp-for="EntranceGate" class="control-label"></label>
-                <input asp-for="EntranceGate" class="form-control" />
+                <select asp-for="EntranceGate" class="form-control">
+                    <option asp_for="EntranceGate" value="Norte">Norte</option>
+                    <option asp_for="EntranceGate" value="Oriente">Oriente</option>
+                    <option asp_for="EntranceGate" value="Occidente">Occidente</option>
+                    <option asp_for="EntranceGate" value="Sur">Sur</option>
+                </select>
                 <span asp-validation-for="EntranceGate" class="text-danger"></span>
             </div>
 

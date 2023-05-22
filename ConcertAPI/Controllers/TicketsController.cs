@@ -1,7 +1,6 @@
 ﻿using ConcertAPI.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Data.Entity.Infrastructure;
 using DbUpdateException = System.Data.Entity.Infrastructure.DbUpdateException;
 
 namespace ConcertAPI.Controllers
@@ -48,7 +47,7 @@ namespace ConcertAPI.Controllers
 
                 await _context.SaveChangesAsync();
             }
-            catch(DbUpdateException ex)
+            catch (DbUpdateException ex)
             {
                 if (ex.InnerException.Message.Contains("duplicate")) return Conflict(String.Format("{0} ya existe el tiquete.", ticket.Id));
             }

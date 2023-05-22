@@ -10,7 +10,7 @@ namespace ConcertAPI.DAL
         [Display(Name = "Fecha de uso")]
         public DateTime? UseDate { get; set; }
 
-        [Display(Name = "Ocupada")]
+        [Display(Name = "¿Está ocupada?")]
         public bool IsUsed { get; set; }
 
         [Display(Name = "Puerta de entrada")]
