@@ -18,11 +18,20 @@ namespace ConcertAPI.Controllers
         }
 
         [HttpGet, ActionName("Get")]
-        [Route("GetTicketById/{ticketId}")]
-        public async Task<ActionResult<Ticket>> GetTicketById(Guid? ticketId)
+        [Route("Get")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
         {
-            var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
-            if (ticket == null) return NotFound("Boleta no válida.");
+            var tickets = await _context.Tickets.ToListAsync();
+            if (tickets == null) return NotFound();
+            return tickets;
+        }
+
+        [HttpGet, ActionName("Get")]
+        [Route("Get/{id}")]
+        public async Task<ActionResult<Ticket>> GetTicketById(Guid? id)
+        {
+            var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.Id == id);
+            if (ticket == null) return NotFound();
             return Ok(ticket);
         }
 
@@ -34,6 +43,7 @@ namespace ConcertAPI.Controllers
             {
                 if (id != ticket.Id) return NotFound("Boleta no válida.");
                 ticket.UseDate = DateTime.Now;
+                ticket.IsUsed = true;
                 _context.Tickets.Update(ticket);
 
                 await _context.SaveChangesAsync();
